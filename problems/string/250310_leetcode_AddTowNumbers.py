@@ -30,3 +30,23 @@ class Solution:
         s = d1 + d2
 
         return self.intToList(s)
+
+
+class Solution:
+    def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+        res_head = res_step = ListNode()
+        while l1 or l2:
+            res_step.val += l1.val if hasattr(l1, 'val') else 0
+            res_step.val += l2.val if hasattr(l2, 'val') else 0
+
+            l1 = l1.next if l1 else None
+            l2 = l2.next if l2 else None
+
+            if not (l1 or l2 or res_step.val >= 10):
+                break
+
+            res_step.next = ListNode(val=res_step.val // 10)
+            res_step.val = res_step.val % 10
+
+            res_step = res_step.next
+        return res_head
